@@ -1,18 +1,34 @@
-class Point:
-
-    def __init__(self, x=0, y=0):
-        """Konstuktor punktu."""
+class Ksztalty:
+    def __init__(self, x, y):
         self.x = x
         self.y = y
+        self.opis = "To będzie klasa dla ogólnych kształtów"
 
-    def __add__(self, point):
-        return Point(self.x + point.x, self.y + point.y)
+    def pole(self):
+        return self.x * self.y
 
-    def __str__(self):
-        return f'Point({self.x}, {self.y})'
+    def obwod(self):
+        return 2 * self.x + 2 * self.y
+
+    def dodaj_opis(self, text):
+        self.opis = text
+
+    def skalowanie(self, czynnik):
+        self.x = self.x * czynnik
+        self.x = self.y * czynnik
 
 
-p1 = Point(1, 1)
-p2 = Point(-5, 2)
-p3 = p1 + p2
-print(p3)
+class Kwadrat(Ksztalty):
+
+    def __init__(self, x):
+        self.x = x
+        self.y = x
+
+    def __add__(self, x):
+        return Kwadrat(self.x + x)
+
+
+Kw1 = Kwadrat(5)
+print(Kw1.obwod())
+Kw2 = Kw1.__add__(7)
+print(Kw2.obwod())
