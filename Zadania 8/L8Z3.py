@@ -7,7 +7,7 @@ print(df)
 print(df["Sprzedawca"].unique())
 
 # Zadanie 3 b
-# print(df.sort_values(('Utarg'), ascending=False).nth(4))
+print(df.nlargest(5, ["Utarg"]))
 
 # Zadanie 3 c - suma zamowien dla sprzedawcy
 print(df.groupby('Sprzedawca')['idZamowienia'].count())
@@ -16,13 +16,11 @@ print(df.groupby('Sprzedawca')['idZamowienia'].count())
 print(df.groupby('Kraj')['idZamowienia'].count())
 
 # Zadanie 3 e - suma zamowien 2005 dla polskich sprzedawcow
-# print(df(['Kraj' == 'Polska'] & df['Data zamowienia'] >= '2005-01-01') & df['Data zamowienia'] <= '2006-01-01')['idZamowienia'].count()))
+print(df[((df["Data zamowienia"].str.contains("2005")) & (df["Kraj"] == "Polska"))]["idZamowienia"].count())
 
 # Zadanie 3 f - srednia zamowien z roku 2004
-# print(df[df["Data zamowienia"].str.contains("2004")])
+print(df[df["Data zamowienia"].str.contains("2004")]["Utarg"].mean())
 
 # Zadanie 3 g -
-# df[df["Data zamowienia"].str.contains("2004")]
-#            .to_csv("zamowienia_2004.csv", index=False, sep=";")
-# df[df["Data zamowienia"].str.contains("2005")]
-#            .to_csv("zamowienia_2005.csv", index=False, sep=";")
+df[df["Data zamowienia"].str.contains("2004")].to_csv("zamowienia_2004.csv", index=False, sep=";")
+df[df["Data zamowienia"].str.contains("2005")].to_csv("zamowienia_2005.csv", index=False, sep=";")
